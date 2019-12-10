@@ -1,0 +1,34 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan darken-2 ie-nav" [containerInside]="false">
+    <mdb-navbar-brand>
+        <a class="navbar-brand" href="#">
+            <img alt="Save my trip Logo" src="assets/image/logo-save-my-trip.png" height="50" alt="mdb logo">
+        </a>
+    </mdb-navbar-brand>
+    <links>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active waves-light" mdbWavesEffect>
+                <a class="nav-link" routerLinkActive="active">Accueil</a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a routerLink="/trips" routerLinkActive="active" class="nav-link">Liste des voyages</a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a routerLink="/form-trip" routerLinkActive="active" class="nav-link">Sauvegarder un voyage</a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link">Opinions</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link"><mdb-icon fab icon="facebook-f"></mdb-icon></a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link"><mdb-icon fab icon="twitter"></mdb-icon></a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link"><mdb-icon fab icon="instagram"></mdb-icon></a>
+            </li>
+        </ul>
+    </links>
+</mdb-navbar>

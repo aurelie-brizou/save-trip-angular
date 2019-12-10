@@ -1,0 +1,21 @@
+[ 
+    {
+        "type": "A vélo"
+    },
+
+    {
+        "type": "Road trip en voiture"
+    },
+
+    {
+        "type": "Trek"
+    },
+
+    {
+        "type": "Séjour"
+    },
+
+    {
+        "type": "Backpacker"
+    }   
+]
