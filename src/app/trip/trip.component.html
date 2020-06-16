@@ -1,1 +1,34 @@
-<p>trip works!</p>
+<div *ngIf="trip$ | async as trip">
+    <mdb-card cascade="true" wider="true" reverse="true" class="my-4">
+        <!--Card image-->
+        <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+            <mdb-card-img src="{{ trip.photo }}}g"></mdb-card-img>
+        </div>
+        <!--/Card image-->
+
+        <!-- Card content -->
+        <mdb-card-body cascade="true" class="text-center">
+
+            <!--Title-->
+            <mdb-card-title>
+                <h2>{{ trip.name }}</h2>
+            </mdb-card-title>
+
+            <h5 class="indigo-text">
+                <strong>{{ trip.type }}</strong>
+            </h5>
+
+            <mdb-card-text>
+                <p> {{ trip.description}}</p>
+            </mdb-card-text>
+
+            <!--Facebook
+            <a class="px-2 icons-sm fb-ic">
+                <mdb-icon fab icon="facebook-f"> </mdb-icon>
+            </a>-->
+        </mdb-card-body>
+
+    </mdb-card>
+
+    <button (click)="onBack()" type="button" mdbBtn color="primary" mdbWavesEffect>Back</button>
+</div>

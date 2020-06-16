@@ -105,6 +105,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "save-my-trip"
+    }
+  },
+  "defaultProject": "save-my-trip",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,6 +1,6 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
 
-<div class="px-4 mb-3 mt-4">
+<div class="trips" class="px-4 mb-3 mt-4">
   <!--Section: Magazine v.3-->
   <section class="magazine-section my-5">
 
@@ -20,9 +20,7 @@
           <!-- Image -->
           <div class="view overlay rounded z-depth-2 mb-4">
             <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/86.jpg" alt="Sample image">
-            <a>
               <div class="mask rgba-white-slight waves-light" mdbWavesEffect></div>
-            </a>
           </div>
 
           <!-- Grid row -->
@@ -45,7 +43,8 @@
           <!-- Title -->
           <div class="d-flex justify-content-between">
             <div class="col-11 text-truncate pl-0 mb-3">
-              <a (click)="onSelect(trip)" class="font-weight-bold">{{trip.name}} - {{trip.id}}</a>
+              <a routerLink="/trip/{{trip.id}}" routerLinkActive="active"><h2 class="font-weight-bold">{{trip.name}} - {{trip.id}}</h2></a>
+
             </div>
             <a>
               <mdb-icon fas icon="angle-double-right"></mdb-icon>

@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Trip } from '../../shared/trip';
 import { TripService } from '../service/trip.service';
-import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
-import { identifierModuleUrl } from '@angular/compiler';
-import { HttpClientModule } from '@angular/common/http';
-import { AngularSvgIconModule } from 'angular-svg-icon';
-
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-trip-list',
@@ -17,19 +13,21 @@ export class TripListComponent implements OnInit {
   trips:Trip[];
 
   constructor(private tService:TripService) { }
- 
+
   ngOnInit( ) {
+    // this.tService.getTrips().pipe(take(1)).subscribe(data => {
     this.tService.getTrips().subscribe(data => {
-      console.log('dataSub' + data);
-      this.trips = data.map(t => {
-        console.log(t.payload.doc.data())
+      this.trips = data.map(trip => {
         return {
-          ...t.payload.doc.data()
-        } as Trip;        
-      })
+          id: trip.payload.doc.id,
+          ...trip.payload.doc.data() as Trip
+        }
+      });
     });
   }
 
+
+  
   getColorTrip(type) {
     switch (type) {
       case 'A vélo':
@@ -41,7 +39,7 @@ export class TripListComponent implements OnInit {
       case 'Séjour':
         return 'black';
       case 'Backpacker':
-        return 'pink';
+        return 'Black';
     }
   }
 
@@ -54,24 +52,9 @@ export class TripListComponent implements OnInit {
          return path + 'travel-car.svg';
       case 'Trek':
          return path + 'trek.svg';
-      // case 'Séjour':
-      //   return 'black';
-      // case 'Backpacker':
-      //   return 'pink';
+      case 'Backpacker':
+        return path + 'backpacker.svg';
     }
   }
 
-  // Using valueChanges() method to fetch simple list of students data. It updates the state of hideWhenNoStudent, noData & preLoader variables when any changes occurs in student data list in real-time.
-  /*dataState() {     
-    this.tService.getTrips().valueChanges().subscribe(data => {
-      this.preLoader = false;
-      if(data.length <= 0){
-        this.hideWhenNoStudent = false;
-        this.noData = true;
-      } else {
-        this.hideWhenNoStudent = true;
-        this.noData = false;
-      }
-    })
-  }*/
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TripService } from '../service/trip.service';
 import { Observable } from 'rxjs';
-import { Trip } from '../models/trip.model';
+import {AngularFirestore} from "@angular/fire/firestore";
+import {Trip} from "../models/trip.model";
 
 @Component({
   selector: 'app-trip',
@@ -12,11 +12,22 @@ import { Trip } from '../models/trip.model';
 })
 export class TripComponent implements OnInit {
 
-  trip: Trip;
+  trip$: Observable<Trip>;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private service: TripService) { }
+  constructor(private _route: ActivatedRoute,
+    private _router: Router,
+    private _service: TripService,
+    private _db: AngularFirestore) {
+  }
 
-  ngOnInit() {}
+
+  ngOnInit() {
+    const id = this._route.snapshot.paramMap.get("id");
+    //console.log("id : " + this.route.snapshot.paramMap.get("id"));
+    this.trip$ = this._service.getTripById(id);
+  };
+
+  onBack() {
+    this._router.navigate(['/trips']);
+  }
 }
