@@ -2,7 +2,7 @@
     <mdb-card cascade="true" wider="true" reverse="true" class="my-4">
         <!--Card image-->
         <div class="view view-cascade overlay waves-light" mdbWavesEffect>
-            <mdb-card-img src="{{ trip.photo }}}g"></mdb-card-img>
+            <mdb-card-img  *ngIf="trip.photo" src="{{ trip.photo }}"></mdb-card-img>
         </div>
         <!--/Card image-->
 
@@ -30,5 +30,5 @@
 
     </mdb-card>
 
-    <button (click)="onBack()" type="button" mdbBtn color="primary" mdbWavesEffect>Back</button>
+    <button (click)="onBack()" type="button" mdbBtn color="primary" mdbWavesEffect>Retour à la liste</button>
 </div>

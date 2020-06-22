@@ -37,7 +37,7 @@ export class TripListComponent implements OnInit {
       case 'Trek':
         return 'blue';
       case 'Séjour':
-        return 'black';
+        return '#ff8e06';
       case 'Backpacker':
         return 'Black';
     }
@@ -54,6 +54,8 @@ export class TripListComponent implements OnInit {
          return path + 'trek.svg';
       case 'Backpacker':
         return path + 'backpacker.svg';
+      case 'Séjour':
+        return path + 'sejour.svg';
     }
   }
 
