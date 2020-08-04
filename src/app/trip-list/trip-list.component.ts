@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Trip } from '../../shared/trip';
 import { TripService } from '../service/trip.service';
 import {take} from "rxjs/operators";
+import {MatIconRegistry} from "@angular/material/icon";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-trip-list',
@@ -44,19 +46,37 @@ export class TripListComponent implements OnInit {
   }
 
   getIconTrip(type) {
-    const path = 'assets/image/';
+    let path = '../assets/image/';
+    let nameIcon = '';
     switch (type) {
       case 'A vélo':
-        return path + 'bike.svg';
+        path = path + 'bike.svg';
+        nameIcon = 'bike';
+        break;
       case 'Road trip en voiture':
-         return path + 'travel-car.svg';
+        path = path + 'travel-car.svg';
+        nameIcon = 'travel';
+        break;
       case 'Trek':
-         return path + 'trek.svg';
+        path = path + 'trek.svg';
+        nameIcon = 'trek';
+        break;
       case 'Backpacker':
-        return path + 'backpacker.svg';
+        path = path + 'backpacker.svg';
+        nameIcon = 'backpacker';
+        break;
       case 'Séjour':
-        return path + 'sejour.svg';
+        path = path + 'sejour.svg';
+        nameIcon = 'sejour';
+        break;
     }
+    this.matIconRegistry.addSvgIcon(
+        nameIcon,
+        this.domSanitzer.bypassSecurityTrustResourceUrl(path)
+    );
+
+    return nameIcon;
+
   }
 
 }

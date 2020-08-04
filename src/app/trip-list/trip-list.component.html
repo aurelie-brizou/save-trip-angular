@@ -1,7 +1,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
 
 <div class="trips" class="px-4 mb-3 mt-4">
-  <!--Section: Magazine v.3-->
+  <!--Section: Magazine-->
   <section class="magazine-section my-5">
 
     <!-- Section heading -->
@@ -9,7 +9,6 @@
 
     <!-- Grid row -->
     <div class="row">
-
 
       <!-- Grid column -->
       <div *ngFor="let trip of trips" class="col-lg-4 col-md-12 mb-lg-0 mb-5">
@@ -25,18 +24,11 @@
 
           <!-- Grid row -->
           <div class="row mb-3">
-
-            <!-- Grid column -->
-            <div *ngIf="trip.type != 0" class="col-12">
-
-              <!-- Badge -->
-              <mdb-badge [ngStyle]="{'background-color': getColorTrip(trip.type)}">
-                <svg-icon src="{{getIconTrip(trip.type)}}" [svgStyle]="{ 'width.px':20 ,'fill':'rgb(255,255,255)','padding.px':1,'margin.px':3 }"></svg-icon>
-                {{trip.type}}
-              </mdb-badge>
-            </div>
-            <!-- Grid column -->
-
+            <!-- Badge trip type -->
+            <button class="badge-trip" [ngStyle]="{'background-color': getColorTrip(trip.type.name)}" disabled>
+              <mat-icon class="icon-trip" svgIcon="{{getIconTrip(trip.type.name)}}" aria-hidden="false" aria-label="{{trip.name}}"></mat-icon>
+              {{trip.type.name}}
+            </button>
           </div>
           <!-- Grid row -->
 

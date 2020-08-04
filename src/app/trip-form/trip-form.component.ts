@@ -1,12 +1,11 @@
 import { Component, OnInit, HostListener, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TripService } from '../service/trip.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { finalize, tap } from 'rxjs/operators';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 
 @Component({
