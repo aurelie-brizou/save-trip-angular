@@ -1,34 +1,20 @@
+<button mat-raised-button color="primary" (click)="onBack()">Retour à la liste des voyages</button>
 <div *ngIf="trip$ | async as trip">
-    <mdb-card cascade="true" wider="true" reverse="true" class="my-4">
-        <!--Card image-->
-        <div class="view view-cascade overlay waves-light" mdbWavesEffect>
-            <mdb-card-img  *ngIf="trip.photo" src="{{ trip.photo }}"></mdb-card-img>
-        </div>
-        <!--/Card image-->
-
-        <!-- Card content -->
-        <mdb-card-body cascade="true" class="text-center">
-
-            <!--Title-->
-            <mdb-card-title>
-                <h2>{{ trip.name }}</h2>
-            </mdb-card-title>
-
-            <h5 class="indigo-text">
-                <strong>{{ trip.type }}</strong>
-            </h5>
-
-            <mdb-card-text>
-                <p> {{ trip.description}}</p>
-            </mdb-card-text>
-
-            <!--Facebook
-            <a class="px-2 icons-sm fb-ic">
-                <mdb-icon fab icon="facebook-f"> </mdb-icon>
-            </a>-->
-        </mdb-card-body>
-
-    </mdb-card>
-
-    <button (click)="onBack()" type="button" mdbBtn color="primary" mdbWavesEffect>Retour à la liste</button>
+    <mat-card class="trip-card">
+        <mat-card-header>
+            <div mat-card-avatar><mat-icon>explore</mat-icon></div>
+            <mat-card-title><h2>{{ trip.name }}</h2></mat-card-title>
+            <mat-card-subtitle>{{ trip.type.name }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{ trip.photo }}" alt="{{ trip.name }}">
+        <mat-card-content>
+            <p>
+                {{ trip.description }}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+        </mat-card-actions>
+    </mat-card>
 </div>

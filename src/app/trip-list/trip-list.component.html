@@ -11,7 +11,7 @@
     <div class="row">
 
       <!-- Grid column -->
-      <div *ngFor="let trip of trips" class="col-lg-4 col-md-12 mb-lg-0 mb-5">
+      <div *ngFor="let trip of trips" class="col-lg-4 col-md-12 mb-lg-0 mb-5 basic-container">
 
         <!-- Featured news -->
         <div class="single-news mb-3">
@@ -19,7 +19,7 @@
           <!-- Image -->
           <div class="view overlay rounded z-depth-2 mb-4">
             <img *ngIf="trip.photo" class="img-responsive" src="{{ trip.photo }}" alt="{{ trip.name }}">
-              <div class="mask rgba-white-slight waves-light" mdbWavesEffect></div>
+            <div class="mask rgba-white-slight waves-light" mdbWavesEffect></div>
           </div>
 
           <!-- Grid row -->
@@ -36,10 +36,9 @@
           <div class="d-flex justify-content-between">
             <div class="col-11 text-truncate pl-0 mb-3">
               <a routerLink="/trip/{{trip.id}}" routerLinkActive="active"><h2 class="font-weight-bold">{{trip.name}} - {{trip.id}}</h2></a>
-
             </div>
             <a>
-              <mdb-icon fas icon="angle-double-right"></mdb-icon>
+              <mat-icon>arrow_forward_ios</mat-icon>
             </a>
           </div>
 
@@ -55,7 +54,7 @@
               <a>24 Food Swaps That Slash Calories.</a>
             </div>
             <a>
-              <mdb-icon fas icon="angle-double-right"></mdb-icon>
+              <mat-icon>arrow_right</mat-icon>
             </a>
           </div>
 
@@ -71,7 +70,7 @@
               <a>How to Make a Beet Cocktail?</a>
             </div>
             <a>
-              <mdb-icon fas icon="angle-double-right"></mdb-icon>
+              <mat-icon>arrow_right</mat-icon>
             </a>
           </div>
 
@@ -87,7 +86,7 @@
               <a>8 Sneaky Reasons You're Always Hungry.</a>
             </div>
             <a>
-              <mdb-icon fas icon="angle-double-right"></mdb-icon>
+              <mat-icon>arrow_right</mat-icon>
             </a>
           </div>
 
@@ -103,23 +102,27 @@
               <a>5 Pressure Cooker Recipes You Need to Try.</a>
             </div>
             <a>
-              <mdb-icon fas icon="angle-double-right"></mdb-icon>
+              <mat-icon>arrow_right</mat-icon>
             </a>
           </div>
 
         </div>
-        <!-- Small news -->
+
+        <mat-divider class="divider-card"></mat-divider>
+
+        <!-- Manage trip buttons-->
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle routerLink="/edit-trip/{{trip.id}}" routerLinkActive="active">Modifier {{trip.name}}</mat-button-toggle>
+          <mat-button-toggle (click)="deleteTrip(trip.id)">Supprimer le trip</mat-button-toggle>
+        </mat-button-toggle-group>
+
 
       </div>
       <!-- Grid column -->
-
-
-
-
 
     </div>
     <!-- Grid row -->
 
   </section>
-  <!--Section: Magazine v.3-->
+  <!-- end Section-->
 </div>

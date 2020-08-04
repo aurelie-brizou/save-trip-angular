@@ -14,11 +14,10 @@ export class TripListComponent implements OnInit {
 
   trips:Trip[];
 
-  constructor(private tService:TripService) { }
+  constructor(private _tService:TripService, private matIconRegistry:MatIconRegistry, private domSanitzer:DomSanitizer,) {}
 
   ngOnInit( ) {
-    // this.tService.getTrips().pipe(take(1)).subscribe(data => {
-    this.tService.getTrips().subscribe(data => {
+    this._tService.getTrips().subscribe(data => {
       this.trips = data.map(trip => {
         return {
           id: trip.payload.doc.id,
@@ -28,8 +27,6 @@ export class TripListComponent implements OnInit {
     });
   }
 
-
-  
   getColorTrip(type) {
     switch (type) {
       case 'A vélo':
@@ -79,4 +76,7 @@ export class TripListComponent implements OnInit {
 
   }
 
+  deleteTrip(idTrip){
+    this._tService.deleteTrip(idTrip);
+  }
 }

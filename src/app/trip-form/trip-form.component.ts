@@ -1,5 +1,5 @@
-import { Component, OnInit, HostListener, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -16,9 +16,17 @@ import { AngularFireStorage } from '@angular/fire/storage';
 export class TripFormComponent implements OnInit {
 
   selectedFile = null;
-  isUploded:boolean;
+  isUploded = null;
+  imageFormEmpty = null;
 
-  tripForm:FormGroup;
+  tripForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    type: new FormControl('', Validators.required),
+    file: new FormControl('', Validators.required),
+    itinerary: new FormControl(),
+    description: new FormControl()
+  });
+
   typesForm$: Observable<Object[]>;
   fileUrl: string;
 
@@ -36,40 +44,20 @@ export class TripFormComponent implements OnInit {
     console.log(event);
     this.selectedFile = event.target.files[0];
     this.isUploded = false;
+    this.tService.uploadFile(this.selectedFile)
+        .then(
+            (url: string) => {
+              this.fileUrl = url;
+            }
+        );
+    this.isUploded = true;
+
 
   }
 
-  onUpUpload(){
-    if(this.selectedFile !== null){
-      this.tService.uploadFile(this.selectedFile)
-          .then(
-          (url: string) => {
-            this.fileUrl = url;
-          }
-      );
-      this.isUploded = true;
-    }
-  }
 
   ngOnInit() {
     this.getTypes();
-    this.initForm();
-  }
-
-  initForm() {
-    this.tripForm = this.formBuilder.group( {
-      name: ['', Validators.required],
-      type: ['', Validators.required],
-      photo: '',
-      itinerary: '',
-      description: ''
-    });
-  }
-
-
-
-  isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
   }
 
 
@@ -77,24 +65,27 @@ export class TripFormComponent implements OnInit {
     this.typesForm$ = (this._httpClient.get('./assets/json/types.json') as Observable<Object[]>);
   }
 
-
-
-  onSubmit(value){
-    console.log(value);
-    if(this.fileUrl && this.fileUrl !== '') {
-      value.photo = this.fileUrl;
+  onSubmit(){
+    // stop here if form is invalid
+    if (this.tripForm.invalid && !this.isUploded) {
+      this.imageFormEmpty = true;
+      return false;
+    } else {
+      let newTrip = this.tripForm.value;
+      console.log(newTrip);
+      if(this.fileUrl && this.fileUrl !== '') {
+        newTrip.photo = this.fileUrl;
+      }
+      this.tService.createTrip(newTrip)
+          .then((res:firebase.firestore.DocumentReference) => {
+            // this.resetFields();
+            this.router.navigate(['/trips']);
+          })
+          .catch((error : Error) => {
+            console.error(error);
+          })
     }
-    this.tService.createTrip(value)
-    .then((res:firebase.firestore.DocumentReference) => {
-        // this.resetFields();
-        this.router.navigate(['/trips']);
-      })
-    .catch((error : Error) => {
-      console.error(error);
-    })
   }
-
-
 
   /*resetFields() {
     throw new Error("Method not implemented.");

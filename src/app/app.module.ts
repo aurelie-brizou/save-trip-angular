@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
@@ -16,9 +16,16 @@ import { TripComponent } from './trip/trip.component';
 import { TripFormComponent } from './trip-form/trip-form.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TripService } from './service/trip.service';
-import { DropzoneDirective } from './dropzone.directive';
-import { AngularSvgIconModule } from 'angular-svg-icon';
-
+import { TripEditComponent } from './trip-edit/trip-edit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
+import {AngularSvgIconModule} from "angular-svg-icon";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -28,7 +35,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     TripComponent,
     TripFormComponent,
     PageNotFoundComponent,
-    DropzoneDirective
+    TripEditComponent
   ],
   imports: [
     BrowserModule,
@@ -40,10 +47,19 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     ReactiveFormsModule,
     FormsModule,
     AngularFireStorageModule,
-    HttpClientModule, 
-    AngularSvgIconModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCardModule,
+    MatIconModule,
+    AngularSvgIconModule,
+    MatDividerModule,
+    MatButtonToggleModule,
+    MatInputModule
   ],
   providers: [TripService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

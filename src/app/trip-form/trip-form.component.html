@@ -1,42 +1,59 @@
-<!-- Default form contact -->
-<form class="text-center border border-light p-5
-" [formGroup]="tripForm" (ngSubmit)="onSubmit(tripForm.value)">
-        
+<div class="container">
+    <form class="border border-light p-5" [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+        <h1 class="form-header">Sauvegarder un nouveau voyage</h1>
 
-    <p class="h4 mb-4">Sauvegarder un nouveau voyage</p>
+        <!-- Name -->
+        <mat-form-field class="full-width">
+            <mat-label>Intitulé du voyage (obligatoire)</mat-label>
+            <input matInput type="text" required [formControl]="tripForm.get('name')" placeholder="Ex:Martinique" >
+            <mat-error *ngIf="tripForm.get('name').hasError('required')">
+                Le type du voyage est obligatoire
+            </mat-error>
+        </mat-form-field>
 
-    <!-- Name -->
-    <label>Intitulé du voyage</label>
-    <input type="text" formControlName="name" class="form-control mb-4" placeholder="Intitulé du voyage">
+        <!-- TODO test material design for input file not working
+        <input type="file" (change)="onFileSelected($event)" #fileInput accept="image/*" style="display: none">
+        <mat-form-field >
+            <input matInput formControlName="photo" placeholder="Fichier" readonly>
+        </mat-form-field>
+        <button mat-button formControlName="photo" (click)="fileInput.click()">Selectionner</button>
+        <p *ngIf="isUploded">Image <b>{{selectedFile.name}}</b> chargée</p>
+        <button mat-button *ngIf="selectedFile" (click)="onUpUpload()">Upload</button>
+        -->
 
-    <label>Charger une image</label>
-    <input type="file" formControlName="photo" (change)="onFileSelected($event)" class="form-control" accept="image/*" >
-    <p *ngIf="isUploded">Image <b>{{selectedFile.name}}</b> chargée</p>
-    <button type="button" class="btn btn-secondary" *ngIf="selectedFile" (click)="onUpUpload()">Upload</button>
+        <!-- Upload -->
+        <div class="form-upload form-group half-width">
+            <label>Charger une image (obligatoire)*</label>
+            <input required [formControl]="tripForm.get('file')" type="file" (change)="onFileSelected($event)" class="form-control" accept="image/*" >
+            <p *ngIf="isUploded">Image <b>{{selectedFile.name}}</b> chargée</p>
 
-    <!-- Type -->
-    <div class="form-group">
-        <label>Type de voyage</label>
-        <select formControlName="type" class="browser-default custom-select mb-4">
-            <option value="" selected disabled>Choisir un type dans la liste déroulante</option>
-            <option *ngFor='let item of (typesForm$ | async)' [value]="item.type" selected>{{item.type}}</option>
-        </select>
-    </div>
+            <mat-error *ngIf="!isUploded && imageFormEmpty">
+                L'image est obligatoire
+            </mat-error>
+        </div>
 
-    <!-- Description -->
-    <div class="form-group">
-        <label>Description</label>
-        <textarea formControlName="description" class="form-control rounded-0" rows="3" placeholder="Description"></textarea>
-    </div>
+        <!-- Type -->
+        <div class="form-group">
+            <mat-form-field class="half-width" appearance="outline">
+                <mat-label>Type de voyage (obligatoire)</mat-label>
+                <mat-select required [formControl]="tripForm.get('type')">
+                    <mat-option>Choisir un type dans la liste déroulante</mat-option>
+                    <mat-option *ngFor='let item of (typesForm$ | async)' [value]="item">{{item.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="tripForm.get('type').hasError('required')">
+                    Le type du voyage est obligatoire
+                </mat-error>
+            </mat-form-field>
+        </div>
 
-    <!-- Copy 
-    <div class="custom-control custom-checkbox mb-4">
-        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy">
-        <label class="custom-control-label" for="defaultContactFormCopy">Send me a copy of this message</label>
-    </div>-->
+        <!-- Description -->
+        <mat-form-field class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea placeholder="Ex: Découverte d'une des plus belles régions du monde" matInput></textarea>
+        </mat-form-field>
 
-    <!-- Send button -->
-    <button class="btn btn-info btn-block" type="submit">Sauvegarder</button>
+        <!-- Send button  -->
+        <button class="button-submit btn" type="submit">Sauvegarder</button>
 
-</form>
-<!-- Default form contact -->
+    </form>
+</div>

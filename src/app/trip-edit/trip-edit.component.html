@@ -1,0 +1,54 @@
+<div class="container">
+    <button mat-raised-button color="primary" (click)="onBack()">Retour à la liste des voyages</button>
+    <div class="btn-toolbar mb-2 mb-md-0">
+
+        <div class="btn-group">
+            <button class="btn btn-sm btn-outline-secondary" (click)="onBack()">Retour à la liste des voyages</button>
+        </div>
+    </div>
+    <form class="border border-light p-5" [formGroup]="tripEditForm" (ngSubmit)="updateForm()">
+        <h1 class="form-header">Editer le voyage {{name.value}}</h1>
+
+        <!-- Name -->
+        <mat-form-field class="full-width">
+            <mat-label>Intitulé du voyage (obligatoire)</mat-label>
+            <input matInput type="text" required [formControl]="tripEditForm.get('name')" placeholder="Ex:Martinique" >
+            <mat-error *ngIf="tripEditForm.get('name').hasError('required')">
+                Le type du voyage est obligatoire
+            </mat-error>
+        </mat-form-field>
+
+
+        <!-- Upload -->
+        <div class="form-upload form-group half-width">
+            <label>Changer la photo</label>
+            <input [formControl]="tripEditForm.get('file')" type="file" formControlName="photo" (change)="onFileSelected($event)" class="form-control" accept="image/*" >
+            <p *ngIf="isUploded">Image <b>{{selectedFile.name}}</b> chargée</p>
+            <!--TODO add control on button when submit form -->
+        </div>
+
+        <p>currentType {{currentType}}</p>
+        <!-- Type -->
+        <div class="form-group">
+            <mat-form-field required class="half-width" appearance="fill">
+                <mat-label>Type de voyage (obligatoire)</mat-label>
+                <mat-select [formControl]="tripEditForm.get('type')" [(value)]="currentType">
+                    <mat-option *ngFor='let item of (typesForm$ | async)'[value]="item">{{item.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="tripEditForm.get('type').hasError('required')">
+                    Le type du voyage est obligatoire
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Description -->
+        <mat-form-field class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea [formControl]="tripEditForm.get('description')" placeholder="Ex: Découverte d'une des plus belles régions du monde" matInput></textarea>
+        </mat-form-field>
+
+        <!-- Send button  -->
+        <button class="button-submit btn" type="submit">Sauvegarder</button>
+
+    </form>
+</div>

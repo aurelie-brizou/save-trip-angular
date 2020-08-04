@@ -1,0 +1,40 @@
+.form-header {
+  background: #8bc90c;
+  padding: 10px;
+  font-size: 1.7em;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.form-upload .mat-error {
+  font-size: 75%;
+}
+
+.form-upload {
+  color: #6c757d;
+}
+
+.form-control {
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.button-submit {
+  background-color:#8bc90c;
+  width: 30%;
+  color: white;
+  padding: 5px;
+  font-size: 1.2em;
+  font-weight: bold;
+}

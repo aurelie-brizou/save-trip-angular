@@ -27,15 +27,14 @@ export class TripService {
     return this._firestore.collection('trips').add(trip);
   }
 
-  /*
-  updateTrip(trip:Trip) {
-    delete trip.id;
-    this._firestore.doc('trips/' + trip.id).update(trip);
+
+  updateTrip(trip:Trip,tripId:string) {
+    this._firestore.doc('trips/' + tripId).update(trip);
   }
 
   deleteTrip(tripId:string) {
     this._firestore.doc('trips/' + tripId).delete();
-  }*/
+  }
 
   uploadFile(file: File) {
     return new Promise(
